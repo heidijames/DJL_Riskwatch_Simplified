@@ -1,69 +1,127 @@
 # Conversion logic and HTTP endpoints are defined here so they can be reused
 # by both the FastAPI app and the MCP tool registrations.
 
+# RiskWatch tools and HTTP endpoints are defined here so they can be reused
+# by both the FastAPI app and the MCP tool registrations.
+
 from fastapi import APIRouter
+from pydantic import BaseModel
+from datetime import datetime
 
-router = APIRouter(prefix="", tags=["unit-conversion"])
+from mcp_resources.converter_resources import (
+    shipment_history,
+    shipping_line_updates,
+)
+
+router = APIRouter(prefix="", tags=["riskwatch"])
 
 
-# --- Core conversion helpers -------------------------------------------------
+#---------- Request Models -----------------------------------
 
-#Executes
-def celsius_to_fahrenheit_value(celsius: float) -> float:
+class RouteRiskRequest(BaseModel):
+    shipment_id: str
+    planned_dispatch_date: str
+    origin_port: str
+    destination_port: str
+    cargo_type: str
+
+
+class ShippingLineUpdateRequest(BaseModel):
+    shipment_id: str
+
+#-------- Risk Assessment Logic --------------------------------
+CARGO_RISK_SCORES = {
+    "general": 10,
+    "temp": 30,
+    "critical": 50,
+}
+
+#-------- Helper Functions -------------------------------------
+# Convert score to risk level
+def get_risk_level(risk_score: int) -> str:
     """
-    Convert Celsius to Fahrenheit using (°C × 9/5) + 32.
-
-    Args:
-        celsius: Temperature in Celsius.
-
-    Returns:
-        The Fahrenheit temperature.
+    Convert a numerical risk score into a risk level.
     """
-    return (celsius * 9 / 5) + 32
+
+    if risk_score >= 70:
+        return "High"
+
+    elif risk_score >= 40:
+        return "Medium"
+
+    else:
+        return "Low"
+
+# Validation functions for input data
+
+def validate_ports(origin_port: str, destination_port: str,
+) -> dict | None:
 
 
-def fahrenheit_to_celsius_value(fahrenheit: float) -> float:
-    """
-    Convert Fahrenheit to Celsius using (°F − 32) × 5/9.
+    shipment_data = shipment_history()
 
-    Args:
-        fahrenheit: Temperature in Fahrenheit.
+    supported_ports = [
+        port.lower()
+        for port in shipment_data["supported_ports"]
+    ]
 
-    Returns:
-        The Celsius temperature.
-    """
-    return (fahrenheit - 32) * 5 / 9
+    if origin_port.lower() not in supported_ports:
+        return {
+            "error":
+            f"Unsupported origin port: {origin_port}"
+        }
+
+    if destination_port.lower() not in supported_ports:
+        return {
+            "error":
+            f"Unsupported destination port: {destination_port}"
+        }
+
+    return None
+
+  
+def validate_cargo_type(cargo_type: str) -> dict | None:
+    
+    if cargo_type.lower() not in CARGO_RISK_SCORES:
+        return {
+            "error":
+            f"Unsupported cargo type: {cargo_type}"
+        }
+
+    return None
 
 
-def kilometers_to_miles_value(kilometers: float) -> float:
-    """
-    Convert kilometers to miles with the 0.621371 factor.
+def validate_shipment_id(shipment_id: str) -> dict | None:
+   
+    if not shipment_id:
+        return {"error": "Shipment ID is required"}
 
-    Args:
-        kilometers: Distance in kilometers.
-
-    Returns:
-        The distance in miles.
-    """
-    return kilometers * 0.621371
+    return None
 
 
-def miles_to_kilometers_value(miles: float) -> float:
-    """
-    Convert miles to kilometers, rejecting negative inputs.
+def validate_dispatch_date(
+    planned_dispatch_date: str
+) -> dict | None:
+    
+    try:
+        datetime.strptime(
+            planned_dispatch_date,
+            "%Y-%m-%d"
+        )
 
-    Args:
-        miles: Distance in miles.
+    except ValueError:
+        return {
+            "error":
+            "Date must use YYYY-MM-DD format"
+        }
 
-    Returns:
-        The distance in kilometers.
+    return None
 
-    Raises:
-        ValueError: If a negative distance is provided.
-    """
-    if miles < 0:
-        raise ValueError("Distance cannot be negative")
-    return miles / 0.621371
+
+
+
+
+
 
 
 # --- FastAPI endpoints -------------------------------------------------------
