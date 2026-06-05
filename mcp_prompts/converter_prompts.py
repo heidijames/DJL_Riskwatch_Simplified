@@ -5,62 +5,72 @@ from __future__ import annotations
 from typing import List, Dict
 
 
-def explain_conversion_prompt() -> List[Dict[str, str]]:
+def risk_assessment_summary_prompt() -> List[Dict[str, str]]:
     """
-    Message list teaching how a specific conversion works.
+    Generate a risk assessment summary.
+    """
 
-    Returns:
-        Conversation template (list of role/content dictionaries).
-    """
     return [
         {
             "role": "system",
             "content": (
-                "You are a clear, encouraging tutor helping a learner understand unit conversions. "
-                "Show the formula, substitute the numbers, and provide the result. Keep it to 5 steps max."
+                "You are a logistics risk analyst. "
+                "Explain shipment risk in simple business language. "
+                "Summarize the risk score, risk level, and operational implications. "
+                "Keep the response concise and practical."
             ),
         },
         {
             "role": "user",
             "content": (
-                "Explain how to convert {input_value} {input_unit} to {target_unit}. "
-                "Return both the math and the final number."
+                "Explain the shipment risk assessment for shipment "
+                "{shipment_id} travelling from {origin_port} "
+                "to {destination_port} carrying {cargo_type}. "
+                "The risk score is {risk_score} and the risk level is {risk_level}."
             ),
         },
     ]
 
 
-def api_usage_prompt() -> List[Dict[str, str]]:
-    """
-    Message list that drafts an HTTP example for the learner.
 
-    Returns:
-        Conversation template (list of role/content dictionaries).
+def shipping_line_status_prompt() -> List[Dict[str, str]]:
     """
+    Generate a shipment status summary.
+    """
+
     return [
         {
             "role": "system",
             "content": (
-                "You write concise API usage snippets. Show a single curl example that calls the correct "
-                "endpoint on http://localhost:8003. Include JSON body and a short explanation line."
+                "You are a logistics coordinator. "
+                "Summarize shipment status updates clearly and professionally. "
+                "Highlight delays, ETA changes, and operational concerns."
             ),
         },
         {
             "role": "user",
-            "content": "Give me a curl example for the {operation} endpoint.",
+            "content": (
+                "Summarize the latest shipment update. "
+                "Shipment ID: {shipment_id}. "
+                "Current Status: {current_status}. "
+                "Current Location: {current_location}. "
+                "ETA: {eta}. "
+                "Delay Days: {delay_days}."
+            ),
         },
     ]
 
 
 PROMPT_DEFINITIONS = [
     {
-        "name": "explain_conversion",
-        "description": "Guide a learner through the math for a specific conversion.",
-        "func": explain_conversion_prompt,
+        "name": "risk_assessment_summary",
+        "description": "Generate a business summary of shipment risk.",
+        "func": risk_assessment_summary_prompt,
     },
     {
-        "name": "api_usage",
-        "description": "Produce a ready-to-run curl snippet for one conversion endpoint.",
-        "func": api_usage_prompt,
+        "name": "shipping_line_status_summary",
+        "description": "Generate a business summary of shipment status updates.",
+        "func": shipping_line_status_prompt,
     },
 ]
+
