@@ -4,9 +4,9 @@
 # RiskWatch tools and HTTP endpoints are defined here so they can be reused
 # by both the FastAPI app and the MCP tool registrations.
 
+from datetime import date
 from fastapi import APIRouter
-from pydantic import BaseModel
-from datetime import datetime
+from pydantic import BaseModel, Field, field_validator
 
 from mcp_resources.converter_resources import (
     shipment_history,
@@ -15,20 +15,6 @@ from mcp_resources.converter_resources import (
 
 router = APIRouter(prefix="", tags=["riskwatch"])
 
-
-#---------- Request Models -----------------------------------
-
-class RouteRiskRequest(BaseModel):
-    shipment_id: str
-    planned_dispatch_date: str
-    origin_port: str
-    destination_port: str
-    cargo_type: str
-
-
-class ShippingLineUpdateRequest(BaseModel):
-    shipment_id: str
-
 #-------- Risk Assessment Logic --------------------------------
 CARGO_RISK_SCORES = {
     "general": 10,
@@ -36,7 +22,47 @@ CARGO_RISK_SCORES = {
     "critical": 50,
 }
 
-#-------- Helper Functions -------------------------------------
+#---------- Request Models -----------------------------------
+
+class RouteRiskRequest(BaseModel):
+    shipment_id: str = Field(min_length=1)
+    planned_dispatch_date: date
+    origin_port: str
+    destination_port: str
+    cargo_type: str
+
+    @field_validator("origin_port", "destination_port")
+    @classmethod
+    def validate_port(cls, value):
+        supported_ports = shipment_history()["supported_ports"]
+
+        for port in supported_ports:
+            if port.lower() == value.lower():
+                return port
+
+        raise ValueError(f"Unsupported port: {value}")
+
+    @field_validator("cargo_type")
+    @classmethod
+    def validate_cargo(cls, value):
+        cargo_type = value.lower()
+
+        if cargo_type not in CARGO_RISK_SCORES:
+            raise ValueError(f"Unsupported cargo type: {value}")
+
+        return cargo_type
+
+
+class ShippingLineUpdateRequest(BaseModel):
+    shipment_id: str = Field(min_length=1)
+
+    @field_validator("shipment_id")
+    @classmethod
+    def validate_shipment_id(cls, value):
+        return value.strip().upper()
+
+
+#-------- Helper Function -------------------------------------
 # Convert score to risk level
 def get_risk_level(risk_score: int) -> str:
     """
@@ -52,75 +78,76 @@ def get_risk_level(risk_score: int) -> str:
     else:
         return "Low"
 
-# Validation functions for input data
 
-def validate_ports(origin_port: str, destination_port: str,
-) -> dict | None:
+#-------Core Business Logic Functions
 
+def assess_route_risk_value(
+    shipment_id: str,
+    planned_dispatch_date: date,
+    origin_port: str,
+    destination_port: str,
+    cargo_type: str,
+):
+    """
+    Assess shipment route risk before dispatch.
+    """
 
     shipment_data = shipment_history()
+    port_risk_scores = shipment_data["port_risk_scores"]
 
-    supported_ports = [
-        port.lower()
-        for port in shipment_data["supported_ports"]
+    port_risk = port_risk_scores.get(
+        destination_port,
+        10,
+    )
+
+    cargo_risk = CARGO_RISK_SCORES[
+        cargo_type
     ]
 
-    if origin_port.lower() not in supported_ports:
+    risk_score = port_risk + cargo_risk
+    risk_level = get_risk_level(risk_score)
+
+    return {
+        "shipment_id": shipment_id,
+        "planned_dispatch_date": str(planned_dispatch_date),
+        "origin_port": origin_port,
+        "destination_port": destination_port,
+        "cargo_type": cargo_type,
+        "port_risk_score": port_risk,
+        "cargo_risk_score": cargo_risk,
+        "risk_score": risk_score,
+        "risk_level": risk_level,
+    }
+
+
+def get_shipping_line_update_value(
+    shipment_id: str,
+):
+    """
+    Retrieve the latest shipping line update for a shipment.
+    """
+
+    update_data = shipping_line_updates()
+    updates = update_data["updates"]
+
+    shipment_id = shipment_id.strip().upper()
+
+    if shipment_id not in updates:
         return {
-            "error":
-            f"Unsupported origin port: {origin_port}"
+            "error": f"No shipping line update found for {shipment_id}"
         }
 
-    if destination_port.lower() not in supported_ports:
-        return {
-            "error":
-            f"Unsupported destination port: {destination_port}"
-        }
+    update = updates[shipment_id]
 
-    return None
-
-  
-def validate_cargo_type(cargo_type: str) -> dict | None:
-    
-    if cargo_type.lower() not in CARGO_RISK_SCORES:
-        return {
-            "error":
-            f"Unsupported cargo type: {cargo_type}"
-        }
-
-    return None
-
-
-def validate_shipment_id(shipment_id: str) -> dict | None:
-   
-    if not shipment_id:
-        return {"error": "Shipment ID is required"}
-
-    return None
-
-
-def validate_dispatch_date(
-    planned_dispatch_date: str
-) -> dict | None:
-    
-    try:
-        datetime.strptime(
-            planned_dispatch_date,
-            "%Y-%m-%d"
-        )
-
-    except ValueError:
-        return {
-            "error":
-            "Date must use YYYY-MM-DD format"
-        }
-
-    return None
-
-
-
-
-
+    return {
+        "shipment_id": shipment_id,
+        "shipping_line": update.get("shipping_line"),
+        "current_status": update.get("current_status"),
+        "current_location": update.get("current_location"),
+        "eta": update.get("eta"),
+        "delay_days": update.get("delay_days"),
+        "update_note": update.get("update_note"),
+    }
 
 
 
