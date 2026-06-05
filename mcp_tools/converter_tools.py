@@ -153,94 +153,46 @@ def get_shipping_line_update_value(
 
 # --- FastAPI endpoints -------------------------------------------------------
 
-@router.post("/celsius-to-fahrenheit")
-def celsius_to_fahrenheit(celsius: float):
+# --- FastAPI Endpoints -------------------------------------------------------
+
+@router.post("/assess-route-risk")
+def assess_route_risk(request: RouteRiskRequest):
     """
-    HTTP endpoint: convert Celsius to Fahrenheit.
-
-    Args:
-        celsius: Temperature in Celsius.
-
-    Returns:
-        JSON dict with the result and operation name.
+    HTTP endpoint: assess shipment route risk.
     """
-    result = celsius_to_fahrenheit_value(celsius)
-    return {"result": result, "operation": "celsius_to_fahrenheit"}
+
+    return assess_route_risk_value(
+        request.shipment_id,
+        request.planned_dispatch_date,
+        request.origin_port,
+        request.destination_port,
+        request.cargo_type,
+    )
 
 
-@router.post("/fahrenheit-to-celsius")
-def fahrenheit_to_celsius(fahrenheit: float):
+@router.post("/shipping-line-update")
+def get_shipping_line_update(request: ShippingLineUpdateRequest):
     """
-    HTTP endpoint: convert Fahrenheit to Celsius.
-
-    Args:
-        fahrenheit: Temperature in Fahrenheit.
-
-    Returns:
-        JSON dict with the result and operation name.
+    HTTP endpoint: retrieve latest shipping line update.
     """
-    result = fahrenheit_to_celsius_value(fahrenheit)
-    return {"result": result, "operation": "fahrenheit_to_celsius"}
 
-
-@router.post("/kilometers-to-miles")
-def kilometers_to_miles(kilometers: float):
-    """
-    HTTP endpoint: convert kilometers to miles.
-
-    Args:
-        kilometers: Distance in kilometers.
-
-    Returns:
-        JSON dict with the result and operation name.
-    """
-    result = kilometers_to_miles_value(kilometers)
-    return {"result": result, "operation": "kilometers_to_miles"}
-
-
-@router.post("/miles-to-kilometers")
-def miles_to_kilometers(miles: float):
-    """
-    HTTP endpoint: convert miles to kilometers with input validation.
-
-    Args:
-        miles: Distance in miles.
-
-    Returns:
-        JSON dict with the result and operation name, or an error message.
-    """
-    try:
-        result = miles_to_kilometers_value(miles)
-        return {"result": result, "operation": "miles_to_kilometers"}
-    except ValueError as exc:  # Keep HTTP response friendly
-        return {"error": str(exc), "operation": "miles_to_kilometers"}
-
+    return get_shipping_line_update_value(
+        request.shipment_id
+    )
 
 # --- Metadata for MCP tool registration ----
 
 TOOL_DEFINITIONS = [
     {
-        "name": "celsius_to_fahrenheit",
-        "description": "Convert Celsius temperature to Fahrenheit",
-        "func": celsius_to_fahrenheit_value,
-        "tags": {"temperature", "conversion"},
+        "name": "assess_route_risk",
+        "description": "Assess shipment route risk before dispatch.",
+        "func": assess_route_risk_value,
+        "tags": {"risk", "shipment", "logistics"},
     },
     {
-        "name": "fahrenheit_to_celsius",
-        "description": "Convert Fahrenheit temperature to Celsius",
-        "func": fahrenheit_to_celsius_value,
-        "tags": {"temperature", "conversion"},
-    },
-    {
-        "name": "kilometers_to_miles",
-        "description": "Convert kilometers to miles",
-        "func": kilometers_to_miles_value,
-        "tags": {"distance", "conversion"},
-    },
-    {
-        "name": "miles_to_kilometers",
-        "description": "Convert miles to kilometers (validates non‑negative input)",
-        "func": miles_to_kilometers_value,
-        "tags": {"distance", "conversion"},
+        "name": "get_shipping_line_update",
+        "description": "Retrieve the latest shipping line update for a shipment.",
+        "func": get_shipping_line_update_value,
+        "tags": {"shipment", "shipping-line", "status"},
     },
 ]
