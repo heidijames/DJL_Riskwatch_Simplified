@@ -18,6 +18,7 @@ python -m venv .venv
 
 # Mac or Gitbash
 source .venv/bin/activate
+ 
 
 # Windows powershell:
 .venv\Scripts\activate

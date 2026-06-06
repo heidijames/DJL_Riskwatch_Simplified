@@ -5,7 +5,10 @@
 # by both the FastAPI app and the MCP tool registrations.
 
 from datetime import date
+import re
 from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
+
 from pydantic import BaseModel, Field, field_validator
 
 from mcp_resources.converter_resources import (
@@ -52,6 +55,22 @@ class RouteRiskRequest(BaseModel):
 
         return cargo_type
 
+    @field_validator("shipment_id")
+    @classmethod
+    def validate_shipment_id(cls, value):
+
+        shipment_id = value.strip().upper()
+
+        if not re.fullmatch(
+            r"SHP\d{3}",
+            shipment_id
+       ):
+            raise ValueError(
+                "Shipment ID must follow format SHP001"
+            )
+
+        return shipment_id
+
 
 class ShippingLineUpdateRequest(BaseModel):
     shipment_id: str = Field(min_length=1)
@@ -96,6 +115,16 @@ def assess_route_risk_value(
     origin_port = origin_port.strip()
     destination_port = destination_port.strip()
     cargo_type = cargo_type.strip().lower()
+
+    
+    if not re.fullmatch(
+        r"SHP\d{3}",
+        shipment_id
+    ):
+        return {
+            "error": "Shipment ID must follow format SHP001"
+      }
+
 
     shipment_data = shipment_history()
     supported_ports = shipment_data["supported_ports"]
@@ -162,14 +191,14 @@ def get_shipping_line_update_value(
     Retrieve the latest shipping line update for a shipment.
     """
 
+    shipment_id = shipment_id.strip().upper()
+
     update_data = shipping_line_updates()
     updates = update_data["updates"]
 
-    shipment_id = shipment_id.strip().upper()
-
     if shipment_id not in updates:
         return {
-            "error": f"No shipping line update found for {shipment_id}"
+            "error": f"Shipment ID not found: {shipment_id}"
         }
 
     update = updates[shipment_id]
@@ -183,7 +212,6 @@ def get_shipping_line_update_value(
         "delay_days": update.get("delay_days"),
         "update_note": update.get("update_note"),
     }
-
 
 # --- FastAPI Endpoints -------------------------------------------------------
 
@@ -203,14 +231,24 @@ def assess_route_risk(request: RouteRiskRequest):
 
 
 @router.post("/shipping-line-update")
-def get_shipping_line_update(request: ShippingLineUpdateRequest):
+def get_shipping_line_update(
+    request: ShippingLineUpdateRequest,
+):
     """
     HTTP endpoint: retrieve latest shipping line update.
     """
 
-    return get_shipping_line_update_value(
+    result = get_shipping_line_update_value(
         request.shipment_id
     )
+
+    if "error" in result:
+        raise HTTPException(
+            status_code=404,
+            detail=result["error"]
+        )
+
+    return result
 
 # --- Metadata for MCP tool registration ----
 

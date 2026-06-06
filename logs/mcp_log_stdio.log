@@ -3,3 +3,622 @@
 2026-03-02 16:00:11,105 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: list_tools
 2026-03-02 16:00:28,249 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
 2026-03-02 16:00:28,249 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool celsius_to_fahrenheit with {'celsius': 25}
+2026-06-06 14:47:37,822 [INFO] httpx: HTTP Request: GET https://pypi.org/pypi/fastmcp/json "HTTP/1.1 200 OK"
+2026-06-06 14:47:37,866 [INFO] fastmcp.server.mixins.transport: Starting MCP server 'Unit Converter (STDIO)' with transport 'stdio'
+2026-06-06 14:47:55,861 [ERROR] mcp.server.lowlevel.server: Received exception from stream: 1 validation error for JSONRPCMessage
+  Invalid JSON: expected ident at line 1 column 2 [type=json_invalid, input_value='npx @modelcontextprotoco...erter_stdio_server.py\n', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.13/v/json_invalid
+2026-06-06 14:50:53,134 [INFO] fastmcp.server.mixins.transport: Starting MCP server 'Unit Converter (STDIO)' with transport 'stdio'
+2026-06-06 14:50:53,172 [INFO] mcp.server.lowlevel.server: Processing request of type SetLevelRequest
+2026-06-06 14:50:53,172 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: set_logging_level debug
+2026-06-06 14:50:59,785 [INFO] mcp.server.lowlevel.server: Processing request of type ListResourcesRequest
+2026-06-06 14:50:59,785 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: list_resources
+2026-06-06 14:51:25,037 [INFO] mcp.server.lowlevel.server: Processing request of type ReadResourceRequest
+2026-06-06 14:51:25,037 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: read_resource resource://shipment_history
+2026-06-06 14:52:17,585 [INFO] mcp.server.lowlevel.server: Processing request of type ListResourceTemplatesRequest
+2026-06-06 14:52:17,586 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: list_resource_templates
+2026-06-06 14:53:46,188 [INFO] mcp.server.lowlevel.server: Processing request of type ListPromptsRequest
+2026-06-06 14:53:46,188 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: list_prompts
+2026-06-06 14:53:52,239 [INFO] mcp.server.lowlevel.server: Processing request of type GetPromptRequest
+2026-06-06 14:53:52,239 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: get_prompt risk_assessment_summary with {}
+2026-06-06 14:53:52,242 [ERROR] fastmcp.prompts.function_prompt: Error rendering prompt risk_assessment_summary
+Traceback (most recent call last):
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\prompts\function_prompt.py", line 366, in render
+    return self.convert_result(result)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\prompts\base.py", line 310, in convert_result
+    raise TypeError(
+    ...<2 lines>...
+    )
+TypeError: messages[0] must be Message or str, got dict. Use Message({'role': 'system', 'content': 'You are a logistics risk analyst. Explain shipment risk in simple business language. Summarize the risk score, risk level, and operational implications. Keep the response concise and practical.'}) to wrap the value.
+2026-06-06 14:53:52,247 [ERROR] fastmcp.server.server: Error rendering prompt 'risk_assessment_summary'
+Traceback (most recent call last):
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\prompts\function_prompt.py", line 366, in render
+    return self.convert_result(result)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\prompts\base.py", line 310, in convert_result
+    raise TypeError(
+    ...<2 lines>...
+    )
+TypeError: messages[0] must be Message or str, got dict. Use Message({'role': 'system', 'content': 'You are a logistics risk analyst. Explain shipment risk in simple business language. Summarize the risk score, risk level, and operational implications. Keep the response concise and practical.'}) to wrap the value.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\server\server.py", line 1584, in render_prompt
+    return await prompt._render(arguments, task_meta=task_meta)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\prompts\base.py", line 372, in _render
+    result = await self.render(arguments)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\prompts\function_prompt.py", line 371, in render
+    raise PromptError(f"Error rendering prompt {self.name!r}: {e}") from e
+fastmcp.exceptions.PromptError: Error rendering prompt 'risk_assessment_summary': messages[0] must be Message or str, got dict. Use Message({'role': 'system', 'content': 'You are a logistics risk analyst. Explain shipment risk in simple business language. Summarize the risk score, risk level, and operational implications. Keep the response concise and practical.'}) to wrap the value.
+2026-06-06 14:55:15,652 [INFO] mcp.server.lowlevel.server: Processing request of type ListToolsRequest
+2026-06-06 14:55:15,653 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: list_tools
+2026-06-06 14:57:33,043 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-06-06 14:57:33,043 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool assess_route_risk with {'shipment_id': 'SHP001', 'planned_dispatch_date': '2026-07-06', 'origin_port': 'Singapore', 'destination_port': 'Dubai', 'cargo_type': 'General'}
+2026-06-06 14:57:33,046 [ERROR] fastmcp.server.server: Error calling tool 'assess_route_risk'
+Traceback (most recent call last):
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\server\server.py", line 1282, in call_tool
+    return await tool._run(arguments or {}, task_meta=task_meta)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\tools\base.py", line 392, in _run
+    return await self.run(arguments)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\tools\function_tool.py", line 333, in run
+    result = await call_sync_fn_in_threadpool(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        type_adapter.validate_python, arguments
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\utilities\async_utils.py", line 34, in call_sync_fn_in_threadpool
+    return await run_sync_in_threadpool(functools.partial(fn, *args, **kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\pydantic\type_adapter.py", line 441, in validate_python
+    return self.validator.validate_python(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        object,
+        ^^^^^^^
+    ...<6 lines>...
+        by_name=by_name,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\mcp_tools\converter_tools.py", line 103, in assess_route_risk_value
+    cargo_risk = CARGO_RISK_SCORES[
+                 ~~~~~~~~~~~~~~~~~^
+        cargo_type
+        ^^^^^^^^^^
+    ]
+    ^
+KeyError: 'General'
+2026-06-06 14:57:49,772 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-06-06 14:57:49,772 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool assess_route_risk with {'shipment_id': 'SHP001', 'planned_dispatch_date': '2026-07-06', 'origin_port': 'Singapore', 'destination_port': 'Dubai', 'cargo_type': 'temperature'}
+2026-06-06 14:57:49,774 [ERROR] fastmcp.server.server: Error calling tool 'assess_route_risk'
+Traceback (most recent call last):
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\server\server.py", line 1282, in call_tool
+    return await tool._run(arguments or {}, task_meta=task_meta)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\tools\base.py", line 392, in _run
+    return await self.run(arguments)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\tools\function_tool.py", line 333, in run
+    result = await call_sync_fn_in_threadpool(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        type_adapter.validate_python, arguments
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\utilities\async_utils.py", line 34, in call_sync_fn_in_threadpool
+    return await run_sync_in_threadpool(functools.partial(fn, *args, **kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\pydantic\type_adapter.py", line 441, in validate_python
+    return self.validator.validate_python(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        object,
+        ^^^^^^^
+    ...<6 lines>...
+        by_name=by_name,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\mcp_tools\converter_tools.py", line 103, in assess_route_risk_value
+    cargo_risk = CARGO_RISK_SCORES[
+                 ~~~~~~~~~~~~~~~~~^
+        cargo_type
+        ^^^^^^^^^^
+    ]
+    ^
+KeyError: 'temperature'
+2026-06-06 14:58:06,122 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-06-06 14:58:06,122 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool assess_route_risk with {'shipment_id': 'SHP001', 'planned_dispatch_date': '2026-07-06', 'origin_port': 'Singapore', 'destination_port': 'Dubai', 'cargo_type': 'temp'}
+2026-06-06 14:58:37,687 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-06-06 14:58:37,687 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool assess_route_risk with {'shipment_id': 'SHP001', 'planned_dispatch_date': '2026-07-06', 'origin_port': 'Singapore', 'destination_port': 'Dubai', 'cargo_type': 'general\n'}
+2026-06-06 14:58:37,689 [ERROR] fastmcp.server.server: Error calling tool 'assess_route_risk'
+Traceback (most recent call last):
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\server\server.py", line 1282, in call_tool
+    return await tool._run(arguments or {}, task_meta=task_meta)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\tools\base.py", line 392, in _run
+    return await self.run(arguments)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\tools\function_tool.py", line 333, in run
+    result = await call_sync_fn_in_threadpool(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        type_adapter.validate_python, arguments
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\utilities\async_utils.py", line 34, in call_sync_fn_in_threadpool
+    return await run_sync_in_threadpool(functools.partial(fn, *args, **kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\pydantic\type_adapter.py", line 441, in validate_python
+    return self.validator.validate_python(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        object,
+        ^^^^^^^
+    ...<6 lines>...
+        by_name=by_name,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\mcp_tools\converter_tools.py", line 103, in assess_route_risk_value
+    cargo_risk = CARGO_RISK_SCORES[
+                 ~~~~~~~~~~~~~~~~~^
+        cargo_type
+        ^^^^^^^^^^
+    ]
+    ^
+KeyError: 'general\n'
+2026-06-06 14:59:01,449 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-06-06 14:59:01,449 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool assess_route_risk with {'shipment_id': 'SHP001', 'planned_dispatch_date': '2026-07-06', 'origin_port': 'Singapore', 'destination_port': 'Dubai', 'cargo_type': 'critical\n'}
+2026-06-06 14:59:01,451 [ERROR] fastmcp.server.server: Error calling tool 'assess_route_risk'
+Traceback (most recent call last):
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\server\server.py", line 1282, in call_tool
+    return await tool._run(arguments or {}, task_meta=task_meta)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\tools\base.py", line 392, in _run
+    return await self.run(arguments)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\tools\function_tool.py", line 333, in run
+    result = await call_sync_fn_in_threadpool(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        type_adapter.validate_python, arguments
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\utilities\async_utils.py", line 34, in call_sync_fn_in_threadpool
+    return await run_sync_in_threadpool(functools.partial(fn, *args, **kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\pydantic\type_adapter.py", line 441, in validate_python
+    return self.validator.validate_python(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        object,
+        ^^^^^^^
+    ...<6 lines>...
+        by_name=by_name,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\mcp_tools\converter_tools.py", line 103, in assess_route_risk_value
+    cargo_risk = CARGO_RISK_SCORES[
+                 ~~~~~~~~~~~~~~~~~^
+        cargo_type
+        ^^^^^^^^^^
+    ]
+    ^
+KeyError: 'critical\n'
+2026-06-06 14:59:17,357 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-06-06 14:59:17,357 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool assess_route_risk with {'shipment_id': 'SHP001', 'planned_dispatch_date': '2026-07-06', 'origin_port': 'Singapore', 'destination_port': 'Dubai', 'cargo_type': 'Critical\n'}
+2026-06-06 14:59:17,361 [ERROR] fastmcp.server.server: Error calling tool 'assess_route_risk'
+Traceback (most recent call last):
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\server\server.py", line 1282, in call_tool
+    return await tool._run(arguments or {}, task_meta=task_meta)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\tools\base.py", line 392, in _run
+    return await self.run(arguments)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\tools\function_tool.py", line 333, in run
+    result = await call_sync_fn_in_threadpool(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        type_adapter.validate_python, arguments
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\utilities\async_utils.py", line 34, in call_sync_fn_in_threadpool
+    return await run_sync_in_threadpool(functools.partial(fn, *args, **kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\pydantic\type_adapter.py", line 441, in validate_python
+    return self.validator.validate_python(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        object,
+        ^^^^^^^
+    ...<6 lines>...
+        by_name=by_name,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\mcp_tools\converter_tools.py", line 103, in assess_route_risk_value
+    cargo_risk = CARGO_RISK_SCORES[
+                 ~~~~~~~~~~~~~~~~~^
+        cargo_type
+        ^^^^^^^^^^
+    ]
+    ^
+KeyError: 'Critical\n'
+2026-06-06 15:00:25,902 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-06-06 15:00:25,903 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool assess_route_risk with {'shipment_id': 'SHP001', 'planned_dispatch_date': '2026-07-06', 'origin_port': 'Singapore', 'destination_port': 'Dubai', 'cargo_type': 'Temp\n'}
+2026-06-06 15:00:25,904 [ERROR] fastmcp.server.server: Error calling tool 'assess_route_risk'
+Traceback (most recent call last):
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\server\server.py", line 1282, in call_tool
+    return await tool._run(arguments or {}, task_meta=task_meta)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\tools\base.py", line 392, in _run
+    return await self.run(arguments)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\tools\function_tool.py", line 333, in run
+    result = await call_sync_fn_in_threadpool(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        type_adapter.validate_python, arguments
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\utilities\async_utils.py", line 34, in call_sync_fn_in_threadpool
+    return await run_sync_in_threadpool(functools.partial(fn, *args, **kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\pydantic\type_adapter.py", line 441, in validate_python
+    return self.validator.validate_python(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        object,
+        ^^^^^^^
+    ...<6 lines>...
+        by_name=by_name,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\mcp_tools\converter_tools.py", line 103, in assess_route_risk_value
+    cargo_risk = CARGO_RISK_SCORES[
+                 ~~~~~~~~~~~~~~~~~^
+        cargo_type
+        ^^^^^^^^^^
+    ]
+    ^
+KeyError: 'Temp\n'
+2026-06-06 15:00:32,495 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-06-06 15:00:32,495 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool assess_route_risk with {'shipment_id': 'SHP001', 'planned_dispatch_date': '2026-07-06', 'origin_port': 'Singapore', 'destination_port': 'Dubai', 'cargo_type': 'temp\n'}
+2026-06-06 15:00:32,496 [ERROR] fastmcp.server.server: Error calling tool 'assess_route_risk'
+Traceback (most recent call last):
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\server\server.py", line 1282, in call_tool
+    return await tool._run(arguments or {}, task_meta=task_meta)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\tools\base.py", line 392, in _run
+    return await self.run(arguments)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\tools\function_tool.py", line 333, in run
+    result = await call_sync_fn_in_threadpool(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        type_adapter.validate_python, arguments
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\utilities\async_utils.py", line 34, in call_sync_fn_in_threadpool
+    return await run_sync_in_threadpool(functools.partial(fn, *args, **kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\pydantic\type_adapter.py", line 441, in validate_python
+    return self.validator.validate_python(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        object,
+        ^^^^^^^
+    ...<6 lines>...
+        by_name=by_name,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\mcp_tools\converter_tools.py", line 103, in assess_route_risk_value
+    cargo_risk = CARGO_RISK_SCORES[
+                 ~~~~~~~~~~~~~~~~~^
+        cargo_type
+        ^^^^^^^^^^
+    ]
+    ^
+KeyError: 'temp\n'
+2026-06-06 15:00:36,052 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-06-06 15:00:36,052 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool assess_route_risk with {'shipment_id': 'SHP001', 'planned_dispatch_date': '2026-07-06', 'origin_port': 'Singapore', 'destination_port': 'Dubai', 'cargo_type': 'temp\n'}
+2026-06-06 15:00:36,053 [ERROR] fastmcp.server.server: Error calling tool 'assess_route_risk'
+Traceback (most recent call last):
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\server\server.py", line 1282, in call_tool
+    return await tool._run(arguments or {}, task_meta=task_meta)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\tools\base.py", line 392, in _run
+    return await self.run(arguments)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\tools\function_tool.py", line 333, in run
+    result = await call_sync_fn_in_threadpool(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        type_adapter.validate_python, arguments
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\utilities\async_utils.py", line 34, in call_sync_fn_in_threadpool
+    return await run_sync_in_threadpool(functools.partial(fn, *args, **kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\pydantic\type_adapter.py", line 441, in validate_python
+    return self.validator.validate_python(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        object,
+        ^^^^^^^
+    ...<6 lines>...
+        by_name=by_name,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\mcp_tools\converter_tools.py", line 103, in assess_route_risk_value
+    cargo_risk = CARGO_RISK_SCORES[
+                 ~~~~~~~~~~~~~~~~~^
+        cargo_type
+        ^^^^^^^^^^
+    ]
+    ^
+KeyError: 'temp\n'
+2026-06-06 15:00:50,227 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-06-06 15:00:50,227 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool assess_route_risk with {'shipment_id': 'SHP001', 'planned_dispatch_date': '2026-07-06', 'origin_port': 'Singapore', 'destination_port': 'Dubai', 'cargo_type': 'temp\n'}
+2026-06-06 15:00:50,228 [ERROR] fastmcp.server.server: Error calling tool 'assess_route_risk'
+Traceback (most recent call last):
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\server\server.py", line 1282, in call_tool
+    return await tool._run(arguments or {}, task_meta=task_meta)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\tools\base.py", line 392, in _run
+    return await self.run(arguments)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\tools\function_tool.py", line 333, in run
+    result = await call_sync_fn_in_threadpool(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        type_adapter.validate_python, arguments
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\utilities\async_utils.py", line 34, in call_sync_fn_in_threadpool
+    return await run_sync_in_threadpool(functools.partial(fn, *args, **kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\pydantic\type_adapter.py", line 441, in validate_python
+    return self.validator.validate_python(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        object,
+        ^^^^^^^
+    ...<6 lines>...
+        by_name=by_name,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\mcp_tools\converter_tools.py", line 103, in assess_route_risk_value
+    cargo_risk = CARGO_RISK_SCORES[
+                 ~~~~~~~~~~~~~~~~~^
+        cargo_type
+        ^^^^^^^^^^
+    ]
+    ^
+KeyError: 'temp\n'
+2026-06-06 15:02:05,537 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-06-06 15:02:05,538 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool assess_route_risk with {'shipment_id': 'SHP001', 'planned_dispatch_date': '2026-07-06', 'origin_port': 'Singapore', 'destination_port': 'Dubai', 'cargo_type': 'Temp\n'}
+2026-06-06 15:02:05,542 [ERROR] fastmcp.server.server: Error calling tool 'assess_route_risk'
+Traceback (most recent call last):
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\server\server.py", line 1282, in call_tool
+    return await tool._run(arguments or {}, task_meta=task_meta)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\tools\base.py", line 392, in _run
+    return await self.run(arguments)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\tools\function_tool.py", line 333, in run
+    result = await call_sync_fn_in_threadpool(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        type_adapter.validate_python, arguments
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\fastmcp\utilities\async_utils.py", line 34, in call_sync_fn_in_threadpool
+    return await run_sync_in_threadpool(functools.partial(fn, *args, **kwargs))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        func, args, abandon_on_cancel=abandon_on_cancel, limiter=limiter
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\anyio\_backends\_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\.venv\Lib\site-packages\pydantic\type_adapter.py", line 441, in validate_python
+    return self.validator.validate_python(
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        object,
+        ^^^^^^^
+    ...<6 lines>...
+        by_name=by_name,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\heidi\DJL_Riskwatch_Simplified\mcp_tools\converter_tools.py", line 103, in assess_route_risk_value
+    cargo_risk = CARGO_RISK_SCORES[
+                 ~~~~~~~~~~~~~~~~~^
+        cargo_type
+        ^^^^^^^^^^
+    ]
+    ^
+KeyError: 'Temp\n'
+2026-06-06 15:22:18,376 [INFO] fastmcp.server.mixins.transport: Starting MCP server 'Unit Converter (STDIO)' with transport 'stdio'
+2026-06-06 15:22:18,388 [INFO] mcp.server.lowlevel.server: Processing request of type SetLevelRequest
+2026-06-06 15:22:18,388 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: set_logging_level debug
+2026-06-06 15:23:00,559 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-06-06 15:23:00,559 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: list_tools
+2026-06-06 15:23:00,563 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool assess_route_risk with {'shipment_id': 'SHP001', 'planned_dispatch_date': '2026-07-06', 'origin_port': 'Singapore', 'destination_port': 'Dubai', 'cargo_type': 'Temp'}
+2026-06-06 15:23:13,813 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-06-06 15:23:13,814 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool assess_route_risk with {'shipment_id': 'SHP001', 'planned_dispatch_date': '2026-07-06', 'origin_port': 'Singapore', 'destination_port': 'Dubai', 'cargo_type': 'General'}
+2026-06-06 15:23:27,933 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-06-06 15:23:27,933 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool assess_route_risk with {'shipment_id': 'SHP001', 'planned_dispatch_date': '2026-07-06', 'origin_port': 'Singapore', 'destination_port': 'Dubai', 'cargo_type': 'critical'}
+2026-06-06 15:23:38,694 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-06-06 15:23:38,694 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool assess_route_risk with {'shipment_id': 'SHP001', 'planned_dispatch_date': '2026-07-06', 'origin_port': 'Singapore', 'destination_port': 'Dubai', 'cargo_type': 'CRITICAL'}
+2026-06-06 15:24:15,238 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-06-06 15:24:15,239 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool get_shipping_line_update with {'shipment_id': 'SHP001'}
+2026-06-06 15:32:10,808 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-06-06 15:32:10,809 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool get_shipping_line_update with {'shipment_id': 'banana'}
+2026-06-06 15:32:44,183 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-06-06 15:32:44,183 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool assess_route_risk with {'shipment_id': 'banana', 'planned_dispatch_date': '', 'origin_port': 'Dubai', 'destination_port': 'Perth', 'cargo_type': 'temp'}
+2026-06-06 15:32:44,195 [WARNING] fastmcp.server.server: Invalid arguments for tool 'assess_route_risk': [{'type': 'date_from_datetime_parsing', 'loc': ('planned_dispatch_date',), 'msg': 'Input should be a valid date or datetime, input is too short', 'input': '', 'ctx': {'error': 'input is too short'}}]
+2026-06-06 15:33:15,321 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-06-06 15:33:15,321 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool assess_route_risk with {'shipment_id': 'banana', 'planned_dispatch_date': '2026-06-07', 'origin_port': 'Dubai', 'destination_port': 'Perth', 'cargo_type': 'temp'}
+2026-06-06 15:33:55,518 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-06-06 15:33:55,518 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool assess_route_risk with {'shipment_id': 'banana', 'planned_dispatch_date': '2026-06-07', 'origin_port': 'perth', 'destination_port': 'dubai', 'cargo_type': 'temp'}
+2026-06-06 15:44:56,461 [INFO] fastmcp.server.mixins.transport: Starting MCP server 'Unit Converter (STDIO)' with transport 'stdio'
+2026-06-06 15:44:56,478 [INFO] mcp.server.lowlevel.server: Processing request of type SetLevelRequest
+2026-06-06 15:44:56,479 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: set_logging_level debug
+2026-06-06 15:45:47,063 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-06-06 15:45:47,063 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: list_tools
+2026-06-06 15:45:47,066 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool assess_route_risk with {'shipment_id': 'banana', 'planned_dispatch_date': '2026-06-05', 'origin_port': 'Perth', 'destination_port': 'Singapore', 'cargo_type': 'temp'}
+2026-06-06 15:51:47,592 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-06-06 15:51:47,593 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool assess_route_risk with {'shipment_id': 'banana', 'planned_dispatch_date': '2026-06-05', 'origin_port': 'Dubai', 'destination_port': 'Singapore', 'cargo_type': 'temp'}
+2026-06-06 15:52:13,806 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-06-06 15:52:13,806 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool assess_route_risk with {'shipment_id': 'banana', 'planned_dispatch_date': '2026-06-05', 'origin_port': 'Dubai', 'destination_port': 'Perth', 'cargo_type': 'temp'}
+2026-06-06 15:52:34,082 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-06-06 15:52:34,082 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool assess_route_risk with {'shipment_id': 'banana', 'planned_dispatch_date': '2026-06-05', 'origin_port': 'Manila', 'destination_port': 'Perth', 'cargo_type': 'temp'}
+2026-06-06 15:53:30,849 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-06-06 15:53:30,850 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool assess_route_risk with {'shipment_id': 'banana', 'planned_dispatch_date': '2026-06-05', 'origin_port': 'Port Klang', 'destination_port': 'Singapore', 'cargo_type': 'temp'}
+2026-06-06 16:13:22,863 [INFO] fastmcp.server.mixins.transport: Starting MCP server 'Unit Converter (STDIO)' with transport 'stdio'
+2026-06-06 16:13:22,898 [INFO] mcp.server.lowlevel.server: Processing request of type SetLevelRequest
+2026-06-06 16:13:22,899 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: set_logging_level debug
+2026-06-06 16:13:30,013 [INFO] mcp.server.lowlevel.server: Processing request of type GetPromptRequest
+2026-06-06 16:13:30,013 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: get_prompt risk_assessment_summary with {}
+2026-06-06 16:13:58,928 [INFO] mcp.server.lowlevel.server: Processing request of type GetPromptRequest
+2026-06-06 16:13:58,929 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: get_prompt shipping_line_status_summary with {}
+2026-06-06 17:02:15,988 [INFO] fastmcp.server.mixins.transport: Starting MCP server 'Unit Converter (STDIO)' with transport 'stdio'
+2026-06-06 18:40:44,460 [INFO] fastmcp.server.mixins.transport: Starting MCP server 'Unit Converter (STDIO)' with transport 'stdio'
+2026-06-06 18:40:49,442 [INFO] mcp.server.lowlevel.server: Processing request of type ListResourcesRequest
+2026-06-06 18:40:49,442 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: list_resources
+2026-06-06 18:40:54,859 [INFO] mcp.server.lowlevel.server: Processing request of type ListPromptsRequest
+2026-06-06 18:40:54,859 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: list_prompts
+2026-06-06 18:40:58,176 [INFO] mcp.server.lowlevel.server: Processing request of type GetPromptRequest
+2026-06-06 18:40:58,176 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: get_prompt risk_assessment_summary with {}
+2026-06-06 18:41:01,599 [INFO] mcp.server.lowlevel.server: Processing request of type ListToolsRequest
+2026-06-06 18:41:01,599 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: list_tools
+2026-06-06 18:41:35,812 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-06-06 18:41:35,812 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool assess_route_risk with {'shipment_id': 'SHP001', 'planned_dispatch_date': '2026-07-06', 'origin_port': 'Dubai', 'destination_port': 'Singapore', 'cargo_type': 'General'}
+2026-06-06 18:41:53,133 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-06-06 18:41:53,133 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool assess_route_risk with {'shipment_id': 'banana', 'planned_dispatch_date': '2026-07-06', 'origin_port': 'Dubai', 'destination_port': 'Singapore', 'cargo_type': 'General'}
+2026-06-06 18:45:53,888 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-06-06 18:45:53,889 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool get_shipping_line_update with {'shipment_id': 'banana'}
+2026-06-06 18:46:07,099 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-06-06 18:46:07,100 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool get_shipping_line_update with {'shipment_id': 'SHP001'}
+2026-06-06 18:46:20,399 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-06-06 18:46:20,399 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool get_shipping_line_update with {'shipment_id': 'SHP01'}
