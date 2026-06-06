@@ -92,6 +92,11 @@ def assess_route_risk_value(
     Assess shipment route risk before dispatch.
     """
 
+    shipment_id = shipment_id.strip().upper()
+    origin_port = origin_port.strip()
+    destination_port = destination_port.strip()
+    cargo_type = cargo_type.strip().lower()
+
     shipment_data = shipment_history()
     port_risk_scores = shipment_data["port_risk_scores"]
 
@@ -100,9 +105,14 @@ def assess_route_risk_value(
         10,
     )
 
-    cargo_risk = CARGO_RISK_SCORES[
+    cargo_risk = CARGO_RISK_SCORES.get(
         cargo_type
-    ]
+    )
+
+    if cargo_risk is None:
+        return {
+            "error": f"Unsupported cargo type: {cargo_type}"
+        }
 
     risk_score = port_risk + cargo_risk
     risk_level = get_risk_level(risk_score)
@@ -118,7 +128,6 @@ def assess_route_risk_value(
         "risk_score": risk_score,
         "risk_level": risk_level,
     }
-
 
 def get_shipping_line_update_value(
     shipment_id: str,
@@ -149,9 +158,6 @@ def get_shipping_line_update_value(
         "update_note": update.get("update_note"),
     }
 
-
-
-# --- FastAPI endpoints -------------------------------------------------------
 
 # --- FastAPI Endpoints -------------------------------------------------------
 
@@ -196,3 +202,5 @@ TOOL_DEFINITIONS = [
         "tags": {"shipment", "shipping-line", "status"},
     },
 ]
+
+
