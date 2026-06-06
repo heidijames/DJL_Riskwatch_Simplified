@@ -98,6 +98,32 @@ def assess_route_risk_value(
     cargo_type = cargo_type.strip().lower()
 
     shipment_data = shipment_history()
+    supported_ports = shipment_data["supported_ports"]
+
+    origin_match = None
+    destination_match = None
+
+    for port in supported_ports:
+
+        if port.lower() == origin_port.lower():
+            origin_match = port
+
+        if port.lower() == destination_port.lower():
+            destination_match = port
+
+    if origin_match is None:
+        return {
+            "error": f"Unsupported origin port: {origin_port}"
+        }
+
+    if destination_match is None:
+        return {
+            "error": f"Unsupported destination port: {destination_port}"
+        }
+
+    origin_port = origin_match
+    destination_port = destination_match
+
     port_risk_scores = shipment_data["port_risk_scores"]
 
     port_risk = port_risk_scores.get(
