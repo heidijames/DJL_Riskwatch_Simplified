@@ -622,3 +622,10 @@ KeyError: 'Temp\n'
 2026-06-06 18:46:07,100 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool get_shipping_line_update with {'shipment_id': 'SHP001'}
 2026-06-06 18:46:20,399 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
 2026-06-06 18:46:20,399 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool get_shipping_line_update with {'shipment_id': 'SHP01'}
+2026-06-06 18:52:08,721 [INFO] fastmcp.server.mixins.transport: Starting MCP server 'Unit Converter (STDIO)' with transport 'stdio'
+2026-06-06 18:52:10,966 [INFO] fastmcp.server.mixins.transport: Starting MCP server 'Unit Converter (STDIO)' with transport 'stdio'
+2026-06-06 18:52:45,508 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-06-06 18:52:45,509 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: list_tools
+2026-06-06 18:52:45,510 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool assess_route_risk with {'shipment_id': 'banana', 'planned_dispatch_date': '2026-07-06', 'origin_port': 'Dubai', 'destination_port': 'Sinagpore', 'cargo_type': 'critical'}
+2026-06-06 18:53:48,622 [INFO] mcp.server.lowlevel.server: Processing request of type CallToolRequest
+2026-06-06 18:53:48,623 [DEBUG] fastmcp.server.mixins.mcp_operations: [Unit Converter (STDIO)] Handler called: call_tool assess_route_risk with {'shipment_id': 'banana', 'planned_dispatch_date': '2026-07-06', 'origin_port': 'Dubai', 'destination_port': 'Singapore', 'cargo_type': 'critical'}

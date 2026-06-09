@@ -343,3 +343,105 @@
 2026-06-06 17:53:33,506 [TRACE] uvicorn.asgi: ::1:64485 - ASGI [14] Send {'type': 'http.response.body', 'body': '<149 bytes>'}
 2026-06-06 17:53:33,507 [TRACE] uvicorn.asgi: ::1:64485 - ASGI [14] Completed
 2026-06-06 17:53:38,514 [TRACE] uvicorn.error: ::1:64485 - HTTP connection lost
+2026-06-06 18:27:57,720 [INFO] uvicorn.error: Started server process [79160]
+2026-06-06 18:27:57,721 [INFO] uvicorn.error: Waiting for application startup.
+2026-06-06 18:27:57,721 [TRACE] uvicorn.asgi: ASGI [1] Started scope={'type': 'lifespan', 'asgi': {'version': '3.0', 'spec_version': '2.0'}, 'state': {}}
+2026-06-06 18:27:57,722 [TRACE] uvicorn.asgi: ASGI [1] Receive {'type': 'lifespan.startup'}
+2026-06-06 18:27:57,731 [INFO] mcp.server.streamable_http_manager: StreamableHTTP session manager started
+2026-06-06 18:27:57,731 [TRACE] uvicorn.asgi: ASGI [1] Send {'type': 'lifespan.startup.complete'}
+2026-06-06 18:27:57,731 [INFO] uvicorn.error: Application startup complete.
+2026-06-06 18:27:57,741 [INFO] uvicorn.error: Uvicorn running on http://localhost:8003 (Press CTRL+C to quit)
+2026-06-06 18:28:19,693 [TRACE] uvicorn.error: ::1:55709 - HTTP connection made
+2026-06-06 18:28:19,714 [TRACE] uvicorn.asgi: ::1:55709 - ASGI [2] Started scope={'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('::1', 8003), 'client': ('::1', 55709), 'scheme': 'http', 'method': 'GET', 'root_path': '', 'path': '/docs', 'raw_path': b'/docs', 'query_string': b'', 'headers': '<...>', 'state': {}}
+2026-06-06 18:28:19,715 [TRACE] uvicorn.asgi: ::1:55709 - ASGI [2] Send {'type': 'http.response.start', 'status': 200, 'headers': '<...>'}
+2026-06-06 18:28:19,716 [INFO] uvicorn.access: ::1:55709 - "GET /docs HTTP/1.1" 200
+2026-06-06 18:28:19,716 [TRACE] uvicorn.asgi: ::1:55709 - ASGI [2] Send {'type': 'http.response.body', 'body': '<1023 bytes>'}
+2026-06-06 18:28:19,717 [TRACE] uvicorn.asgi: ::1:55709 - ASGI [2] Completed
+2026-06-06 18:28:19,728 [TRACE] uvicorn.error: ::1:49672 - HTTP connection made
+2026-06-06 18:28:19,817 [TRACE] uvicorn.asgi: ::1:55709 - ASGI [3] Started scope={'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('::1', 8003), 'client': ('::1', 55709), 'scheme': 'http', 'method': 'GET', 'root_path': '', 'path': '/openapi.json', 'raw_path': b'/openapi.json', 'query_string': b'', 'headers': '<...>', 'state': {}}
+2026-06-06 18:28:19,818 [TRACE] uvicorn.asgi: ::1:55709 - ASGI [3] Send {'type': 'http.response.start', 'status': 200, 'headers': '<...>'}
+2026-06-06 18:28:19,818 [INFO] uvicorn.access: ::1:55709 - "GET /openapi.json HTTP/1.1" 200
+2026-06-06 18:28:19,819 [TRACE] uvicorn.asgi: ::1:55709 - ASGI [3] Send {'type': 'http.response.body', 'body': '<2606 bytes>'}
+2026-06-06 18:28:19,819 [TRACE] uvicorn.asgi: ::1:55709 - ASGI [3] Completed
+2026-06-06 18:28:24,824 [TRACE] uvicorn.error: ::1:55709 - HTTP connection lost
+2026-06-06 18:29:40,386 [TRACE] uvicorn.error: ::1:49672 - HTTP connection lost
+2026-06-06 18:29:40,387 [TRACE] uvicorn.error: ::1:56609 - HTTP connection made
+2026-06-06 18:29:40,387 [TRACE] uvicorn.asgi: ::1:56609 - ASGI [4] Started scope={'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('::1', 8003), 'client': ('::1', 56609), 'scheme': 'http', 'method': 'POST', 'root_path': '', 'path': '/assess-route-risk', 'raw_path': b'/assess-route-risk', 'query_string': b'', 'headers': '<...>', 'state': {}}
+2026-06-06 18:29:40,392 [TRACE] uvicorn.asgi: ::1:56609 - ASGI [4] Receive {'type': 'http.request', 'body': '<155 bytes>', 'more_body': False}
+2026-06-06 18:29:40,405 [TRACE] uvicorn.asgi: ::1:56609 - ASGI [4] Send {'type': 'http.response.start', 'status': 422, 'headers': '<...>'}
+2026-06-06 18:29:40,407 [INFO] uvicorn.access: ::1:56609 - "POST /assess-route-risk HTTP/1.1" 422
+2026-06-06 18:29:40,407 [TRACE] uvicorn.asgi: ::1:56609 - ASGI [4] Send {'type': 'http.response.body', 'body': '<159 bytes>'}
+2026-06-06 18:29:40,408 [TRACE] uvicorn.asgi: ::1:56609 - ASGI [4] Completed
+2026-06-06 18:29:45,417 [TRACE] uvicorn.error: ::1:56609 - HTTP connection lost
+2026-06-06 18:29:58,240 [TRACE] uvicorn.error: ::1:59177 - HTTP connection made
+2026-06-06 18:29:58,243 [TRACE] uvicorn.asgi: ::1:59177 - ASGI [5] Started scope={'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('::1', 8003), 'client': ('::1', 59177), 'scheme': 'http', 'method': 'POST', 'root_path': '', 'path': '/assess-route-risk', 'raw_path': b'/assess-route-risk', 'query_string': b'', 'headers': '<...>', 'state': {}}
+2026-06-06 18:29:58,248 [TRACE] uvicorn.asgi: ::1:59177 - ASGI [5] Receive {'type': 'http.request', 'body': '<154 bytes>', 'more_body': False}
+2026-06-06 18:29:58,250 [TRACE] uvicorn.asgi: ::1:59177 - ASGI [5] Send {'type': 'http.response.start', 'status': 422, 'headers': '<...>'}
+2026-06-06 18:29:58,250 [INFO] uvicorn.access: ::1:59177 - "POST /assess-route-risk HTTP/1.1" 422
+2026-06-06 18:29:58,250 [TRACE] uvicorn.asgi: ::1:59177 - ASGI [5] Send {'type': 'http.response.body', 'body': '<158 bytes>'}
+2026-06-06 18:29:58,251 [TRACE] uvicorn.asgi: ::1:59177 - ASGI [5] Completed
+2026-06-06 18:30:03,257 [TRACE] uvicorn.error: ::1:59177 - HTTP connection lost
+2026-06-06 18:30:10,174 [TRACE] uvicorn.error: ::1:56576 - HTTP connection made
+2026-06-06 18:30:10,177 [TRACE] uvicorn.asgi: ::1:56576 - ASGI [6] Started scope={'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('::1', 8003), 'client': ('::1', 56576), 'scheme': 'http', 'method': 'POST', 'root_path': '', 'path': '/assess-route-risk', 'raw_path': b'/assess-route-risk', 'query_string': b'', 'headers': '<...>', 'state': {}}
+2026-06-06 18:30:10,178 [TRACE] uvicorn.asgi: ::1:56576 - ASGI [6] Receive {'type': 'http.request', 'body': '<155 bytes>', 'more_body': False}
+2026-06-06 18:30:10,190 [TRACE] uvicorn.asgi: ::1:56576 - ASGI [6] Send {'type': 'http.response.start', 'status': 422, 'headers': '<...>'}
+2026-06-06 18:30:10,191 [INFO] uvicorn.access: ::1:56576 - "POST /assess-route-risk HTTP/1.1" 422
+2026-06-06 18:30:10,191 [TRACE] uvicorn.asgi: ::1:56576 - ASGI [6] Send {'type': 'http.response.body', 'body': '<159 bytes>'}
+2026-06-06 18:30:10,196 [TRACE] uvicorn.asgi: ::1:56576 - ASGI [6] Completed
+2026-06-06 18:30:15,207 [TRACE] uvicorn.error: ::1:56576 - HTTP connection lost
+2026-06-06 18:30:30,564 [TRACE] uvicorn.error: ::1:56264 - HTTP connection made
+2026-06-06 18:30:30,566 [TRACE] uvicorn.asgi: ::1:56264 - ASGI [7] Started scope={'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('::1', 8003), 'client': ('::1', 56264), 'scheme': 'http', 'method': 'POST', 'root_path': '', 'path': '/assess-route-risk', 'raw_path': b'/assess-route-risk', 'query_string': b'', 'headers': '<...>', 'state': {}}
+2026-06-06 18:30:30,566 [TRACE] uvicorn.asgi: ::1:56264 - ASGI [7] Receive {'type': 'http.request', 'body': '<156 bytes>', 'more_body': False}
+2026-06-06 18:30:30,567 [TRACE] uvicorn.asgi: ::1:56264 - ASGI [7] Send {'type': 'http.response.start', 'status': 422, 'headers': '<...>'}
+2026-06-06 18:30:30,572 [INFO] uvicorn.access: ::1:56264 - "POST /assess-route-risk HTTP/1.1" 422
+2026-06-06 18:30:30,576 [TRACE] uvicorn.asgi: ::1:56264 - ASGI [7] Send {'type': 'http.response.body', 'body': '<160 bytes>'}
+2026-06-06 18:30:30,581 [TRACE] uvicorn.asgi: ::1:56264 - ASGI [7] Completed
+2026-06-06 18:30:35,594 [TRACE] uvicorn.error: ::1:56264 - HTTP connection lost
+2026-06-06 18:30:45,125 [TRACE] uvicorn.error: ::1:52243 - HTTP connection made
+2026-06-06 18:30:45,126 [TRACE] uvicorn.asgi: ::1:52243 - ASGI [8] Started scope={'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('::1', 8003), 'client': ('::1', 52243), 'scheme': 'http', 'method': 'POST', 'root_path': '', 'path': '/assess-route-risk', 'raw_path': b'/assess-route-risk', 'query_string': b'', 'headers': '<...>', 'state': {}}
+2026-06-06 18:30:45,126 [TRACE] uvicorn.asgi: ::1:52243 - ASGI [8] Receive {'type': 'http.request', 'body': '<155 bytes>', 'more_body': False}
+2026-06-06 18:30:45,128 [TRACE] uvicorn.asgi: ::1:52243 - ASGI [8] Send {'type': 'http.response.start', 'status': 200, 'headers': '<...>'}
+2026-06-06 18:30:45,128 [INFO] uvicorn.access: ::1:52243 - "POST /assess-route-risk HTTP/1.1" 200
+2026-06-06 18:30:45,128 [TRACE] uvicorn.asgi: ::1:52243 - ASGI [8] Send {'type': 'http.response.body', 'body': '<215 bytes>'}
+2026-06-06 18:30:45,129 [TRACE] uvicorn.asgi: ::1:52243 - ASGI [8] Completed
+2026-06-06 18:30:50,143 [TRACE] uvicorn.error: ::1:52243 - HTTP connection lost
+2026-06-06 18:37:33,486 [TRACE] uvicorn.error: ::1:57486 - HTTP connection made
+2026-06-06 18:37:33,487 [TRACE] uvicorn.asgi: ::1:57486 - ASGI [9] Started scope={'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('::1', 8003), 'client': ('::1', 57486), 'scheme': 'http', 'method': 'POST', 'root_path': '', 'path': '/shipping-line-update', 'raw_path': b'/shipping-line-update', 'query_string': b'', 'headers': '<...>', 'state': {}}
+2026-06-06 18:37:33,489 [TRACE] uvicorn.asgi: ::1:57486 - ASGI [9] Receive {'type': 'http.request', 'body': '<29 bytes>', 'more_body': False}
+2026-06-06 18:37:33,490 [TRACE] uvicorn.asgi: ::1:57486 - ASGI [9] Send {'type': 'http.response.start', 'status': 200, 'headers': '<...>'}
+2026-06-06 18:37:33,490 [INFO] uvicorn.access: ::1:57486 - "POST /shipping-line-update HTTP/1.1" 200
+2026-06-06 18:37:33,490 [TRACE] uvicorn.asgi: ::1:57486 - ASGI [9] Send {'type': 'http.response.body', 'body': '<221 bytes>'}
+2026-06-06 18:37:33,491 [TRACE] uvicorn.asgi: ::1:57486 - ASGI [9] Completed
+2026-06-06 18:37:38,492 [TRACE] uvicorn.error: ::1:57486 - HTTP connection lost
+2026-06-06 18:37:45,225 [TRACE] uvicorn.error: ::1:52997 - HTTP connection made
+2026-06-06 18:37:45,227 [TRACE] uvicorn.asgi: ::1:52997 - ASGI [10] Started scope={'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('::1', 8003), 'client': ('::1', 52997), 'scheme': 'http', 'method': 'POST', 'root_path': '', 'path': '/shipping-line-update', 'raw_path': b'/shipping-line-update', 'query_string': b'', 'headers': '<...>', 'state': {}}
+2026-06-06 18:37:45,227 [TRACE] uvicorn.asgi: ::1:52997 - ASGI [10] Receive {'type': 'http.request', 'body': '<28 bytes>', 'more_body': False}
+2026-06-06 18:37:45,228 [TRACE] uvicorn.asgi: ::1:52997 - ASGI [10] Send {'type': 'http.response.start', 'status': 404, 'headers': '<...>'}
+2026-06-06 18:37:45,229 [INFO] uvicorn.access: ::1:52997 - "POST /shipping-line-update HTTP/1.1" 404
+2026-06-06 18:37:45,229 [TRACE] uvicorn.asgi: ::1:52997 - ASGI [10] Send {'type': 'http.response.body', 'body': '<41 bytes>'}
+2026-06-06 18:37:45,229 [TRACE] uvicorn.asgi: ::1:52997 - ASGI [10] Completed
+2026-06-06 18:37:50,238 [TRACE] uvicorn.error: ::1:52997 - HTTP connection lost
+2026-06-06 18:54:45,315 [TRACE] uvicorn.error: ::1:57177 - HTTP connection made
+2026-06-06 18:54:45,323 [TRACE] uvicorn.asgi: ::1:57177 - ASGI [11] Started scope={'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('::1', 8003), 'client': ('::1', 57177), 'scheme': 'http', 'method': 'POST', 'root_path': '', 'path': '/assess-route-risk', 'raw_path': b'/assess-route-risk', 'query_string': b'', 'headers': '<...>', 'state': {}}
+2026-06-06 18:54:45,326 [TRACE] uvicorn.asgi: ::1:57177 - ASGI [11] Receive {'type': 'http.request', 'body': '<158 bytes>', 'more_body': False}
+2026-06-06 18:54:45,334 [TRACE] uvicorn.asgi: ::1:57177 - ASGI [11] Send {'type': 'http.response.start', 'status': 422, 'headers': '<...>'}
+2026-06-06 18:54:45,334 [INFO] uvicorn.access: ::1:57177 - "POST /assess-route-risk HTTP/1.1" 422
+2026-06-06 18:54:45,335 [TRACE] uvicorn.asgi: ::1:57177 - ASGI [11] Send {'type': 'http.response.body', 'body': '<159 bytes>'}
+2026-06-06 18:54:45,335 [TRACE] uvicorn.asgi: ::1:57177 - ASGI [11] Completed
+2026-06-06 18:54:50,349 [TRACE] uvicorn.error: ::1:57177 - HTTP connection lost
+2026-06-06 18:55:01,266 [TRACE] uvicorn.error: ::1:52698 - HTTP connection made
+2026-06-06 18:55:01,267 [TRACE] uvicorn.asgi: ::1:52698 - ASGI [12] Started scope={'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('::1', 8003), 'client': ('::1', 52698), 'scheme': 'http', 'method': 'POST', 'root_path': '', 'path': '/assess-route-risk', 'raw_path': b'/assess-route-risk', 'query_string': b'', 'headers': '<...>', 'state': {}}
+2026-06-06 18:55:01,268 [TRACE] uvicorn.asgi: ::1:52698 - ASGI [12] Receive {'type': 'http.request', 'body': '<159 bytes>', 'more_body': False}
+2026-06-06 18:55:01,269 [TRACE] uvicorn.asgi: ::1:52698 - ASGI [12] Send {'type': 'http.response.start', 'status': 422, 'headers': '<...>'}
+2026-06-06 18:55:01,269 [INFO] uvicorn.access: ::1:52698 - "POST /assess-route-risk HTTP/1.1" 422
+2026-06-06 18:55:01,269 [TRACE] uvicorn.asgi: ::1:52698 - ASGI [12] Send {'type': 'http.response.body', 'body': '<160 bytes>'}
+2026-06-06 18:55:01,270 [TRACE] uvicorn.asgi: ::1:52698 - ASGI [12] Completed
+2026-06-06 18:55:06,282 [TRACE] uvicorn.error: ::1:52698 - HTTP connection lost
+2026-06-06 18:55:12,070 [TRACE] uvicorn.error: ::1:60459 - HTTP connection made
+2026-06-06 18:55:12,074 [TRACE] uvicorn.asgi: ::1:60459 - ASGI [13] Started scope={'type': 'http', 'asgi': {'version': '3.0', 'spec_version': '2.3'}, 'http_version': '1.1', 'server': ('::1', 8003), 'client': ('::1', 60459), 'scheme': 'http', 'method': 'POST', 'root_path': '', 'path': '/assess-route-risk', 'raw_path': b'/assess-route-risk', 'query_string': b'', 'headers': '<...>', 'state': {}}
+2026-06-06 18:55:12,076 [TRACE] uvicorn.asgi: ::1:60459 - ASGI [13] Receive {'type': 'http.request', 'body': '<158 bytes>', 'more_body': False}
+2026-06-06 18:55:12,082 [TRACE] uvicorn.asgi: ::1:60459 - ASGI [13] Send {'type': 'http.response.start', 'status': 200, 'headers': '<...>'}
+2026-06-06 18:55:12,083 [INFO] uvicorn.access: ::1:60459 - "POST /assess-route-risk HTTP/1.1" 200
+2026-06-06 18:55:12,083 [TRACE] uvicorn.asgi: ::1:60459 - ASGI [13] Send {'type': 'http.response.body', 'body': '<218 bytes>'}
+2026-06-06 18:55:12,089 [TRACE] uvicorn.asgi: ::1:60459 - ASGI [13] Completed
+2026-06-06 18:55:17,103 [TRACE] uvicorn.error: ::1:60459 - HTTP connection lost
