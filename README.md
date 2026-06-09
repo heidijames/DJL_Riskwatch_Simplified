@@ -1,7 +1,17 @@
-# Unit Converter API + MCP Tutorial
+# DJL RiskWatch API + MCP Server
+
+DJL RiskWatch is a logistics risk assessment system built using FastAPI and FastMCP.
 
 - builds the FastAPI app, wraps it with FastMCP, mounts MCP HTTP/SSE endpoints, registers resources and prompts, and starts uvicorn.
 - requirements.txt – Python dependencies.
+
+The system provides:
+
+• Route risk assessment before shipment dispatch
+• Shipping line status monitoring
+• MCP resources for shipment history and shipping updates
+• MCP prompts for business summaries and shipment reporting
+
 
 ## Prerequisites
 
@@ -50,51 +60,108 @@ MCP endpoints served by FastMCP:
 
 ⸻
 
+## System Components
+
+Tools
+  assess_route_risk
+  get_shipping_line_update
+
+Resources
+  resource://shipment_history
+  resource://shipping_line_updates
+
+Prompts
+  risk_assessment_summary
+  shipping_line_status_summary
+
+⸻
+
+## Supported Inputs
+
+# Supported Ports
+  Singapore
+  Port Klang
+  Shanghai
+  Dubai
+
+# Cargo Types
+  general
+  temp
+  critical
+
+# Shipment ID Format
+  Shipment IDs must follow this format:
+
+  SHP001
+
 ## Try the HTTP endpoints (curl)
 
+1. Assess Route Risk - Valid Input
 ```bash
-curl -X POST "http://localhost:8003/miles-to-kilometers?miles=3.1" \
- -H "Authorization: Bearer 143f4a46d74fee0d7918b2857577868cb3daf9e6e50ee91c2f7975ba26fdb8f7"
+curl -X POST "http://localhost:8003/assess-route-risk" \
+-H "Content-Type: application/json" \
+-d '{
+  "shipment_id":"SHP001",
+  "planned_dispatch_date":"2026-06-15",
+  "origin_port":"Singapore",
+  "destination_port":"Shanghai",
+  "cargo_type":"temp"
+}'
+```
+2. Assess Route Risk - Invalid Shipment ID
+```bash
+curl -X POST "http://localhost:8003/assess-route-risk" \
+-H "Content-Type: application/json" \
+-d '{
+  "shipment_id":"BANANA",
+  "planned_dispatch_date":"2026-06-15",
+  "origin_port":"Singapore",
+  "destination_port":"Shanghai",
+  "cargo_type":"temp"
+}'
 
-# If we use pydantic models
-curl -X POST "http://localhost:8003/miles-to-kilometers" \
- -H "Content-Type: application/json" \
- -H "Authorization: Bearer Y658139cf61948208ed76a4b36122b9552ec5c3f6da5e02f7c5d85d995dede17dE" \
- -d "3.1"
+Expected result:
+
+422 Validation Error
 ```
 
+3. Assess Route Risk - Invalid Port
 ```bash
-# Celsius → Fahrenheit
-curl -X POST "http://localhost:8003/celsius-to-fahrenheit" \
- -H "Content-Type: application/json" \
- -d "25"
+curl -X POST "http://localhost:8003/assess-route-risk" \
+-H "Content-Type: application/json" \
+-d '{
+  "shipment_id":"SHP001",
+  "planned_dispatch_date":"2026-06-15",
+  "origin_port":"Perth",
+  "destination_port":"Shanghai",
+  "cargo_type":"temp"
+}'
+
+Expected result:
+
+Validation error or unsupported port error
 ```
 
+4. Shipping Line Update - Valid Shipment ID
 ```bash
-# Fahrenheit → Celsius
-curl -X POST "http://localhost:8003/fahrenheit-to-celsius" \
- -H "Content-Type: application/json" \
- -d "86"
+curl -X POST "http://localhost:8003/shipping-line-update" \
+-H "Content-Type: application/json" \
+-d '{
+  "shipment_id":"SHP001"
+}'
 ```
-
+5. Shipping Line Update - Unknown Shipment ID
 ```bash
-# Kilometers → Miles
-curl -X POST "http://localhost:8003/kilometers-to-miles" \
- -H "Content-Type: application/json" \
- -d "5"
+curl -X POST "http://localhost:8003/shipping-line-update" \
+-H "Content-Type: application/json" \
+-d '{
+  "shipment_id":"SHP999"
+}'
+
+Expected result:
+
+404 Not Found
 ```
-
-```bash
-# Miles → Kilometers (rejects negative values)
-curl -X POST "http://localhost:8003/miles-to-kilometers" \
- -H "Content-Type: application/json" \
- -d "3.1"
-```
-
-Each endpoint returns JSON like:
-
-- { "result": <number>, "operation": "..." } or { "error": "..." } for invalid input.
-
 ## Headers & Authentication (common to all)
 
 ### Add JSON content type (and optionally your auth token)
@@ -104,134 +171,115 @@ Each endpoint returns JSON like:
 
 Our server doesn’t require auth yet, we can omit the **Authorization** header.
 
-## Use with MCP (VS Code Example)
+## Inspect with MCP Inspector
 
-1. Start the server as above.
-2. Point your MCP client to the process.
-
-```json
-// Example VS Code .vscode/mcp.json entry:
-{
-  "servers": {
-    "UnitConverter": {
-      "command": "python",
-      "args": ["converter_api_tutorial.py"]
-    }
-  }
-}
-```
-
-3. From the MCP client, list artifacts. You should see:
-   - Tools: celsius_to_fahrenheit, fahrenheit_to_celsius, kilometers_to_miles, miles_to_kilometers
-   - Resources: resource://unit_reference, resource://troubleshooting_guide
-   - Prompts: explain_conversion, api_usage
-
-⸻
-
-## Inspect with the npm MCP Inspector
-
-- explore everything (tools, resources, prompts) in a browser.
-- with the server already running on http://localhost:8003
-
-```bash
-# If env error appears
+# Streamable HTTP
 npx @modelcontextprotocol/inspector@latest -e DUMMY=1 --url http://localhost:8003/mcp --transport streamable-http
 
-# If you want to test the older HTTP:
-npx @modelcontextprotocol/inspector@latest -e DUMMY=1 --url http://localhost:8003/mcp --transport http
-
-# If you want to test the deprecated SSE:
-npx @modelcontextprotocol/inspector@latest -e DUMMY=1 --url http://localhost:8003/sse --transport sse
-```
-
-## To run the STDIO server only
-
-```bash
-# If venv is ".venv", change to .\.venv\Scripts\python.exe
+# STDIO
 npx @modelcontextprotocol/inspector python converter_stdio_server.py
-```
 
-- UI runs on localhost:5173 by default.
-- Change UI port if needed: CLIENT_PORT=8080 npx @modelcontextprotocol/inspector --url http://localhost:8003/mcp --transport http
-- Add headers if required: --header "Authorization: Bearer TOKEN".
+In MCP Inspector, verify:
 
-## JSON-RPC Examples for Prompts & Resources
+Tools:
+  assess_route_risk
+  get_shipping_line_update
+Resources:
+  shipment_history
+  shipping_line_updates
+Prompts:
+  risk_assessment_summary
+  shipping_line_status_summary
 
-1. List all prompts
+## MCP JSON-RPC Examples
 
-```bash
-curl -s -X POST <SERVER_URL> \
+# List Tools
+curl -s -X POST "http://localhost:8003/mcp" \
 -H "Content-Type: application/json" \
--d '{"jsonrpc":"2.0","method":"prompts/list","params":{},"id":1}'
-```
+-d '{"jsonrpc":"2.0","method":"tools/list","params":{},"id":1}'
 
-⸻
-
-2. Get a specific prompt
-
-```bash
-curl -s -X POST <SERVER_URL> \
+# List Resources
+curl -s -X POST "http://localhost:8003/mcp" \
 -H "Content-Type: application/json" \
--d '{"jsonrpc":"2.0","method":"prompts/get","params":{"name":"summarize"},"id":2}'
-```
+-d '{"jsonrpc":"2.0","method":"resources/list","params":{},"id":2}'
 
-⸻
-
-3. Render/execute a prompt with variables
-
-```bash
-curl -s -X POST <SERVER_URL> \
+# Read Shipment History Resource
+curl -s -X POST "http://localhost:8003/mcp" \
 -H "Content-Type: application/json" \
--d '{"jsonrpc":"2.0","method":"prompts/render","params":{"name":"summarize","variables":{"text":"This is the content to summarize","tone":"neutral"}},"id":3}'
-```
+-d '{"jsonrpc":"2.0","method":"resources/read","params":{"uri":"resource://shipment_history"},"id":3}'
 
-4. List available resources
-
-```bash
-curl -s -X POST <SERVER_URL> \
+# Read Shipping Line Updates Resource
+curl -s -X POST "http://localhost:8003/mcp" \
 -H "Content-Type: application/json" \
--d '{"jsonrpc":"2.0","method":"resources/list","params":{},"id":4}'
-```
+-d '{"jsonrpc":"2.0","method":"resources/read","params":{"uri":"resource://shipping_line_updates"},"id":4}'
 
-5. Read a resource by URI
-
-```bash
-curl -s -X POST <SERVER_URL> \
+# List Prompts
+curl -s -X POST "http://localhost:8003/mcp" \
 -H "Content-Type: application/json" \
--d '{"jsonrpc":"2.0","method":"resources/read","params":{"uri":"file:///data/report.pdf"},"id":5}'
-```
-
-6. Search resources (if supported)
-
-```bash
-curl -s -X POST <SERVER_URL> \
+-d '{"jsonrpc":"2.0","method":"prompts/list","params":{},"id":5}'
+# Get Risk Assessment Prompt
+curl -s -X POST "http://localhost:8003/mcp" \
 -H "Content-Type: application/json" \
--d '{"jsonrpc":"2.0","method":"resources/search","params":{"query":"error OR exception","limit":50},"id":6}'
-```
+-d '{"jsonrpc":"2.0","method":"prompts/get","params":{"name":"risk_assessment_summary"},"id":6}'
 
-⸻
+## Project Structure
+DJL_Riskwatch_Simplified/
+│
+├── converter_streamable_http_server.py
+├── converter_stdio_server.py
+├── requirements.txt
+│
+├── mcp_resources/
+│   ├── converter_resources.py
+│   ├── global_supply_chain_risk_2026.csv
+│   └── shipping_line_updates.json
+│
+├── mcp_tools/
+│   └── converter_tools.py
+│
+├── mcp_prompts/
+│   └── converter_prompts.py
+│
+├── utils/
+│   └── logging_utils.py
+│
+├── logs/
+└── docs/
 
-## Handling errors
+## Development Notes
 
-- Parse error (-32700)
-- Invalid request (-32600)
-- Method not found (-32601)
-- Invalid params (-32602)
-- Internal error (-32603)
+This project was built from the lecturer’s FastAPI + MCP starter code.
 
-## Notes
+The original unit converter logic was replaced with logistics-specific RiskWatch logic:
 
-macOS/Linux (bash/zsh)
-• The examples above will work as-is.
+Resources were changed to shipment history and shipping line updates.
 
-```bash
-# Windows PowerShell
-curl -Method POST <SERVER_URL> `  -Headers @{ "Content-Type"="application/json" }`
--Body '{"jsonrpc":"2.0","method":"prompts/list","params":{},"id":1}'
-```
+Tools were changed to route risk assessment and shipment status lookup.
 
-Windows CMD
+Prompts were changed to business summaries for logistics use cases.
 
-```bash
-curl -s -X POST <SERVER_URL> -H "Content-Type: application/json" -d "{\"jsonrpc\":\"2.0\",\"method\":\"prompts/list\",\"params\":{},\"id\":1}"
-```
+Validation was added using Pydantic and defensive checks inside core business logic.
+
+## Testing was completed through:
+
+Swagger / FastAPI
+MCP Inspector
+curl commands
+Git version control
+
+
+## Error Handling
+
+# Common HTTP errors:
+
+422 Validation Error - invalid request body or input format
+404 Not Found - shipment ID not found in shipping update resource
+400 Bad Request - unsupported business input, if handled by endpoint logic
+
+# Common MCP JSON-RPC errors:
+
+-32700 Parse error
+-32600 Invalid request
+-32601 Method not found
+-32602 Invalid params
+-32603 Internal error
