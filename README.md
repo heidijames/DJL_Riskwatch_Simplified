@@ -1,3 +1,6 @@
+> **Note:** This is a simplified coursework version. The full, maintained project is **[Shipment Watch](https://github.com/heidijames/shipment-watch)**.
+
+
 # DJL RiskWatch API + MCP Server
 
 DJL RiskWatch is a logistics risk assessment system built using FastAPI and FastMCP.
